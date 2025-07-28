@@ -324,10 +324,66 @@ def main():
     )
 
     app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("admin", admin_panel))
     app.add_handler(conv_handler)
-    app.add_handler(MessageHandler(filters.Regex('^📋 Ver Cola$'), ver_cola))
-    app.add_handler(MessageHandler(filters.Regex('^🎤 Cómo pedir$'), como_pedir))
-    app.add_handler(MessageHandler(filters.Regex('^ℹ️ Información$'), informacion))
+    app.add_handler(MessageHandler(filters.Regex('^📋 Ver Cola
+
+    print("🤖 El bot se ha iniciado y está listo.")
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()), ver_cola))
+    app.add_handler(MessageHandler(filters.Regex('^🎤 Cómo pedir
+
+    print("🤖 El bot se ha iniciado y está listo.")
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()), como_pedir))
+    app.add_handler(MessageHandler(filters.Regex('^ℹ️ Información
+
+    print("🤖 El bot se ha iniciado y está listo.")
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()), informacion))
+    
+    # Handlers de administrador
+    app.add_handler(MessageHandler(filters.Regex('^🗑️ Limpiar Cola
+
+    print("🤖 El bot se ha iniciado y está listo.")
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()), limpiar_cola))
+    app.add_handler(MessageHandler(filters.Regex('^📊 Estadísticas
+
+    print("🤖 El bot se ha iniciado y está listo.")
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()), estadisticas_admin))
+    app.add_handler(MessageHandler(filters.Regex('^📋 Ver Cola Completa
+
+    print("🤖 El bot se ha iniciado y está listo.")
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()), ver_cola_completa))
+    app.add_handler(MessageHandler(filters.Regex('^🚫 Eliminar Última
+
+    print("🤖 El bot se ha iniciado y está listo.")
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()), eliminar_ultima))
+    app.add_handler(MessageHandler(filters.Regex('^🔙 Menú Principal
+
+    print("🤖 El bot se ha iniciado y está listo.")
+    app.run_polling()
+
+if __name__ == "__main__":
+    main()), start))
 
     print("🤖 El bot se ha iniciado y está listo.")
     app.run_polling()
