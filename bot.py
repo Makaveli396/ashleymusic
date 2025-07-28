@@ -353,7 +353,8 @@ def main():
 
     # Conversación para solicitar canciones
     conv_handler = ConversationHandler(
-        entry_points=[MessageHandler(filters.Regex('^🥡 Pedir canción$'), iniciar_solicitud)],
+        entry_points=[MessageHandler(filters.Regex('^🥡 Pedir canción
+), iniciar_solicitud)],
         states={
             ESPERANDO_CANCION: [MessageHandler(filters.TEXT & ~filters.COMMAND, recibir_cancion)]
         },
@@ -364,20 +365,44 @@ def main():
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("admin", admin_panel))
     app.add_handler(conv_handler)
-    app.add_handler(MessageHandler(filters.Regex('^📋 Ver Cola$'), ver_cola))
-    app.add_handler(MessageHandler(filters.Regex('^🔧 Admin Panel$'), admin_panel))
-    app.add_handler(MessageHandler(filters.Regex('^🎤 Cómo pedir$'), como_pedir))
-    app.add_handler(MessageHandler(filters.Regex('^ℹ️ Información$'), informacion))
+    app.add_handler(MessageHandler(filters.Regex('^📋 Ver Cola
+), ver_cola))
+    app.add_handler(MessageHandler(filters.Regex('^🔧 Admin Panel
+), admin_panel))
+    app.add_handler(MessageHandler(filters.Regex('^🎤 Cómo pedir
+), como_pedir))
+    app.add_handler(MessageHandler(filters.Regex('^ℹ️ Información
+), informacion))
     
     # Handlers de administrador
-    app.add_handler(MessageHandler(filters.Regex('^🗑️ Limpiar Cola$'), limpiar_cola))
-    app.add_handler(MessageHandler(filters.Regex('^📊 Estadísticas$'), estadisticas_admin))
-    app.add_handler(MessageHandler(filters.Regex('^📋 Ver Cola Completa$'), ver_cola_completa))
-    app.add_handler(MessageHandler(filters.Regex('^🚫 Eliminar Última$'), eliminar_ultima))
-    app.add_handler(MessageHandler(filters.Regex('^🔙 Menú Principal$'), start))
+    app.add_handler(MessageHandler(filters.Regex('^🗑️ Limpiar Cola
+), limpiar_cola))
+    app.add_handler(MessageHandler(filters.Regex('^📊 Estadísticas
+), estadisticas_admin))
+    app.add_handler(MessageHandler(filters.Regex('^📋 Ver Cola Completa
+), ver_cola_completa))
+    app.add_handler(MessageHandler(filters.Regex('^🚫 Eliminar Última
+), eliminar_ultima))
+    app.add_handler(MessageHandler(filters.Regex('^🔙 Menú Principal
+), start))
 
     print("🤖 El bot se ha iniciado y está listo.")
-    app.run_polling()
+    
+    # Verificar si estamos en Render (tiene variables de entorno específicas)
+    if os.getenv("RENDER"):
+        # Usar webhooks en Render
+        print("🌐 Usando webhooks para Render...")
+        webhook_url = f"https://{os.getenv('RENDER_EXTERNAL_HOSTNAME')}/{BOT_TOKEN}"
+        app.run_webhook(
+            listen="0.0.0.0",
+            port=int(PORT),
+            url_path=BOT_TOKEN,
+            webhook_url=webhook_url
+        )
+    else:
+        # Usar polling en desarrollo local
+        print("🔄 Usando polling para desarrollo local...")
+        app.run_polling()
 
 if __name__ == "__main__":
     main()
