@@ -288,7 +288,7 @@ async def informacion(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def iniciar_solicitud(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Inicia la conversación para solicitar una canción."""
-    await update.message.reply_text("🎵 Escribe el nombre de la canción que deseas solicitar: la subiremos lo mas pronto posible aqui: https://t.me/MusicForAll01234", reply_markup=ReplyKeyboardRemove())
+    await update.message.reply_text("🎵 Escribe el nombre de la canción que deseas solicitar: la subiremos lo mas pronto posible aqui 👉 https://t.me/MusicForAll01234", reply_markup=ReplyKeyboardRemove())
     return ESPERANDO_CANCION
 
 async def recibir_cancion(update: Update, context: ContextTypes.DEFAULT_TYPE):
