@@ -388,7 +388,7 @@ if __name__ == "__main__":
     # Handlers de administrador
     app.add_handler(MessageHandler(filters.Regex('^🗑️ Limpiar Cola
 
-    print("🤖 El bot se ha iniciado y está listo.")
+    print("🤖 El bot se ha iniciado y está listoo.")
     app.run_polling()
 
 if __name__ == "__main__":
