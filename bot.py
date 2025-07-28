@@ -90,8 +90,8 @@ async def admin_panel(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"Selecciona una opción:"
     )
     
-    teclado_admin = ReplyKeyboardMarkup(botones_admin, resize_keyboard=True)
-    await update.message.reply_text(mensaje, parse_mode="Markdown", reply_markup=teclado_admin)
+    teclado_admin_panel = ReplyKeyboardMarkup(botones_admin, resize_keyboard=True)
+    await update.message.reply_text(mensaje, parse_mode="Markdown", reply_markup=teclado_admin_panel)
 
 async def limpiar_cola(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Limpia completamente la cola de peticiones."""
@@ -360,67 +360,21 @@ def main():
         fallbacks=[CommandHandler("cancelar", cancelar)],
     )
 
+    # Agregar handlers
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("admin", admin_panel))
     app.add_handler(conv_handler)
-    app.add_handler(MessageHandler(filters.Regex('^📋 Ver Cola
-
-    print("🤖 El bot se ha iniciado y está listo.")
-    app.run_polling()
-
-if __name__ == "__main__":
-    main()), ver_cola))
-    app.add_handler(MessageHandler(filters.Regex('^🎤 Cómo pedir
-
-    print("🤖 El bot se ha iniciado y está listo.")
-    app.run_polling()
-
-if __name__ == "__main__":
-    main()), como_pedir))
-    app.add_handler(MessageHandler(filters.Regex('^ℹ️ Información
-
-    print("🤖 El bot se ha iniciado y está listo.")
-    app.run_polling()
-
-if __name__ == "__main__":
-    main()), informacion))
+    app.add_handler(MessageHandler(filters.Regex('^📋 Ver Cola$'), ver_cola))
+    app.add_handler(MessageHandler(filters.Regex('^🔧 Admin Panel$'), admin_panel))
+    app.add_handler(MessageHandler(filters.Regex('^🎤 Cómo pedir$'), como_pedir))
+    app.add_handler(MessageHandler(filters.Regex('^ℹ️ Información$'), informacion))
     
     # Handlers de administrador
-    app.add_handler(MessageHandler(filters.Regex('^🗑️ Limpiar Cola
-
-    print("🤖 El bot se ha iniciado y está listoo.")
-    app.run_polling()
-
-if __name__ == "__main__":
-    main()), limpiar_cola))
-    app.add_handler(MessageHandler(filters.Regex('^📊 Estadísticas
-
-    print("🤖 El bot se ha iniciado y está listo.")
-    app.run_polling()
-
-if __name__ == "__main__":
-    main()), estadisticas_admin))
-    app.add_handler(MessageHandler(filters.Regex('^📋 Ver Cola Completa
-
-    print("🤖 El bot se ha iniciado y está listo.")
-    app.run_polling()
-
-if __name__ == "__main__":
-    main()), ver_cola_completa))
-    app.add_handler(MessageHandler(filters.Regex('^🚫 Eliminar Última
-
-    print("🤖 El bot se ha iniciado y está listo.")
-    app.run_polling()
-
-if __name__ == "__main__":
-    main()), eliminar_ultima))
-    app.add_handler(MessageHandler(filters.Regex('^🔙 Menú Principal
-
-    print("🤖 El bot se ha iniciado y está listo.")
-    app.run_polling()
-
-if __name__ == "__main__":
-    main()), start))
+    app.add_handler(MessageHandler(filters.Regex('^🗑️ Limpiar Cola$'), limpiar_cola))
+    app.add_handler(MessageHandler(filters.Regex('^📊 Estadísticas$'), estadisticas_admin))
+    app.add_handler(MessageHandler(filters.Regex('^📋 Ver Cola Completa$'), ver_cola_completa))
+    app.add_handler(MessageHandler(filters.Regex('^🚫 Eliminar Última$'), eliminar_ultima))
+    app.add_handler(MessageHandler(filters.Regex('^🔙 Menú Principal$'), start))
 
     print("🤖 El bot se ha iniciado y está listo.")
     app.run_polling()
